@@ -3,15 +3,27 @@ package hu.mta.sztaki.lpds.cloud.simulator.helpers.trace.file;
 import java.lang.reflect.InvocationTargetException;
 
 import hu.mta.sztaki.lpds.cloud.simulator.helpers.job.Job;
-
+/**
+ * This Class is used to read PreziReader format traces
+ */
 public class PreziReader extends TraceFileReaderFoundation {
 
+	/**
+	 * PreziReader Constructor .log format
+	 * 
+	 * @param String fileName, int from, int to, boolean allowReadingFurther, Class<? extends Job> jobType
+	 */
 	public PreziReader(String fileName, int from, int to, boolean allowReadingFurther, Class<? extends Job> jobType)
 			throws SecurityException, NoSuchMethodException {
 		super("LOG format", fileName, from, to, allowReadingFurther, jobType);
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * This method reads a line at a time and checks if it matches the correct format for the trace
+	 * 
+	 * @param String line
+	 */
 	protected boolean isTraceLine(String line) {
 		try {
 		String[] fragments = line.split("\\s+");
@@ -36,7 +48,11 @@ public class PreziReader extends TraceFileReaderFoundation {
 	protected void metaDataCollector(String temp) {
 		// do nothing
 	}
-
+	/**
+	 * creates a job from the given line in the corect format
+	 * 
+	 * @param String line
+	 */
 	protected Job createJobFromLine(String line)
 			throws IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
 
